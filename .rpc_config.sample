@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# WebDAV upload
+RPC_WEBDAV_HOST="127.0.0.1:8000"
+RPC_WEBDAV_USER="admin"
+RPC_WEBDAV_PASS="password"
+#RPC_WEBDAV_MAX_FILES=3
+
+# iNWX DynDNS
+RPC_INWX_DYNDNS_USER="user"
+RPC_INWX_DYNDNS_PASS="pass"
