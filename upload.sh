@@ -19,7 +19,7 @@ for file in $DIR; do
 	echo -n "uploading $file ... "
 
 	# upload to WebDAV
-	status_code=$(curl --write-out %{http_code} --silent --output /dev/null --user "${RPC_WEBDAV_USER}:${RPC_WEBDAV_PASS}" -T $file "http://${RPC_WEBDAV_HOST}/")
+	status_code=$(curl --write-out %{http_code} --silent --output /dev/null --user "${RPC_WEBDAV_USER}:${RPC_WEBDAV_PASS}" -T $file "${RPC_WEBDAV_HOST}")
 	
 	# handle response
 	if [[ "$status_code" -ne 201 ]] ; then
