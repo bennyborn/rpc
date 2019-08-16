@@ -19,9 +19,17 @@ fi
 tstamp=$(date "+%Y-%m-%d_%H_%M_%S")
 filename=$(hostname)_$tstamp.jpg
 
-# take picture and optimize it
-fswebcam -d /dev/video0 -r 1920x1080 --jpeg 85 -F 3 --no-banner --save ~/.rpc/captured/${filename}
-jpegoptim --strip-all ~/.rpc/captured/${filename}
+# take picture
+fswebcam -q -d /dev/video0 -r 1920x1080 --jpeg 85 -F 3 --no-banner --save ~/.rpc/captured/${filename} >/dev/null 2>&1
 
-# move it into upload queue
-mv ~/.rpc/captured/${filename} ~/.rpc/uploading/${filename}
+if test -f ~/.rpc/captured/${filename}; then
+
+	# optimize picture
+	jpegoptim -q --strip-all ~/.rpc/captured/${filename}
+
+	# move it into upload queue
+	mv ~/.rpc/captured/${filename} ~/.rpc/uploading/${filename}
+else
+	echo "Error. Could not take picture."
+	exit 1
+fi
